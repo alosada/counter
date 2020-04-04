@@ -1,0 +1,2 @@
+require "./counter"
+run Counter
