@@ -25,6 +25,8 @@ The date you're submitting this
 If applicable, please provide the url where we can find and interact with your running application.
 ### Time spent
 Started at: 2020/04/04 - 10:40 CST
+Lunch Break started 2020/04/04 15:00 CST
+Lunch Break Ended 2020/04/04 16:05 CST
 Finished at: ?????
 ### Assumptions made
 Use this section to tell us about any assumptions that you made when creating your solution.

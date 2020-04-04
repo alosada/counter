@@ -10,11 +10,11 @@ class Counter < Sinatra::Base
   post "/register" do
   	@user = User.new(params)
   	return json({token: set_token}) if @user.save
-  	halt 400, "#{@user.errors.full_messages.join(', ')}\n"
+  	halt 400, "'I have a bad feelign about this' (#{@user.errors.full_messages.join(', ')})\n"
   end
 
   post "/login" do
-  	halt 401, "Bad credentials\n" unless good_login?
+  	halt 401, "'Who is this? Whats your operating number?' (Bad credentials)\n" unless good_login?
     json({token: set_token})
   end
 
@@ -68,7 +68,7 @@ class Counter < Sinatra::Base
   def protect!
   	return nil if authorized?
   	headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-  	halt 403, "Forbidden\n"
+  	halt 403, "'All other information on your level is restricted'(Forbidden)\n"
   end
 
   def authorized?
