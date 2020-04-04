@@ -7,23 +7,26 @@ require 'rack/test'
 RSpec.describe 'The HelloWorld App' do
   include Rack::Test::Methods
 
+  after(:all) { User.destroy_all}
+  let(:user_params) { generate_user_params }
+
   def app
     App
   end
 
-  it "says hello" do
-    get '/'
+  it "registers a user" do
+    user_params = generate_user_params
+    post '/register', user_params
     expect(last_response).to be_ok
-    expect(last_response.body).to eq('Hello World')
+    body = JSON.parse(last_response.body)
+    expect(body['token']).to be_truthy
+    expect(body['token'].length).to eq(80)
   end
 
-  it "registers a user" do
-  	params = {
-  		email: 'foobar@bazbat.com',
-  		password: 'Foobar123'
-  	}
-    post '/register', params
-    expect(last_response).to be_ok
-    expect(last_response.body).to eq('ok')
+  def generate_user_params(attributes = {})
+    {
+      email: 'foobar@bazbat.com',
+      password: 'Foobar123'
+    }.merge(attributes)
   end
 end

@@ -6,6 +6,7 @@ gem "rake"  # so we can run Rake tasks
 gem 'rack-test'
 gem 'rspec'
 gem 'bcrypt'
+gem 'jwt'
 
 group :production do
   # Use Postgresql for ActiveRecord

@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/json'
 require 'sinatra/activerecord'
 require 'byebug'
+require 'jwt'
 
 set :database_file, '../config/database.yml'
 
