@@ -23,6 +23,20 @@ class Counter < Sinatra::Base
     json(to_json_api(user))
   end
 
+  get "/v1/next" do
+  	protect!
+  	user.counter +=1
+  	user.save
+  	json(to_json_api(user))
+  end
+
+  put "/v1/next" do
+  	protect!
+  	user.counter = params[:current] || 1
+  	user.save
+  	json(to_json_api(user))
+  end
+
   private
 
   def to_json_api(resource)

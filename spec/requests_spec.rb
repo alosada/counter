@@ -51,6 +51,20 @@ RSpec.describe 'The Counter App' do
     expect(last_response.body).to eq("Forbidden\n")
   end
 
+  it "gets the next counter" do
+    get '/v1/next', nil, {'Authorization' => "Bearer #{token}"}
+    expect(last_response).to be_ok
+    body = JSON.parse(last_response.body)
+    expect(body['attributes']['counter']).to eq(2)
+  end
+
+  it "sets the counter to supplied number" do
+    put '/v1/next', {current: 42 }, {'Authorization' => "Bearer #{token}"}
+    expect(last_response).to be_ok
+    body = JSON.parse(last_response.body)
+    expect(body['attributes']['counter']).to eq(42)
+  end
+
   def generate_user_params(attributes = {})
     {
       email: 'foobar@bazbat.com',
