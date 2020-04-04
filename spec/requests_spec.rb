@@ -1,26 +1,54 @@
 ENV['APP_ENV'] = 'test'
 
-require './app'
+require './counter'
 require 'rspec'
 require 'rack/test'
 
-RSpec.describe 'The HelloWorld App' do
+RSpec.describe 'The Counter App' do
   include Rack::Test::Methods
 
   after(:all) { User.destroy_all}
   let(:user_params) { generate_user_params }
 
   def app
-    App
+    Counter
   end
 
   it "registers a user" do
-    user_params = generate_user_params
     post '/register', user_params
     expect(last_response).to be_ok
     body = JSON.parse(last_response.body)
     expect(body['token']).to be_truthy
-    expect(body['token'].length).to eq(80)
+    expect { JWT.decode(body['token'], "secret") }.to_not raise_error(JWT::DecodeError)
+  end
+
+  it "logs in a user" do
+    post '/login', user_params
+    expect(last_response).to be_ok
+    body = JSON.parse(last_response.body)
+    expect(body['token']).to be_truthy
+    expect { JWT.decode(body['token'], "secret") }.to_not raise_error(JWT::DecodeError)
+  end
+
+  it "fails to logs in a user" do
+    post '/login', user_params.merge({password: 'foobar'})
+    expect(last_response).not_to be_ok
+    expect(last_response.status).to eq(401)
+    expect(last_response.body).to eq("Bad credentials\n")
+  end
+
+  it "gets the current counter" do
+    get '/v1/current', nil, {'Authorization' => "Bearer #{token}"}
+    expect(last_response).to be_ok
+    body = JSON.parse(last_response.body)
+    expect(body['attributes']['counter']).to eq(1)
+  end
+
+  it "fails to get the current counter" do
+    get '/v1/current', nil, {'Authorization' => "Bearer foobar"}
+    expect(last_response).not_to be_ok
+    expect(last_response.status).to eq(403)
+    expect(last_response.body).to eq("Forbidden\n")
   end
 
   def generate_user_params(attributes = {})
@@ -28,5 +56,9 @@ RSpec.describe 'The HelloWorld App' do
       email: 'foobar@bazbat.com',
       password: 'Foobar123'
     }.merge(attributes)
+  end
+
+  def token
+    JWT.encode({user_id: User.last.id}, "secret", 'HS256')
   end
 end
