@@ -7,6 +7,7 @@ gem 'rack-test'
 gem 'rspec'
 gem 'bcrypt'
 gem 'jwt'
+gem 'sassc'
 
 group :production do
   # Use Postgresql for ActiveRecord

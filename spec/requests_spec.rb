@@ -34,32 +34,32 @@ RSpec.describe 'The Counter App' do
     post '/login', user_params.merge({password: 'foobar'})
     expect(last_response).not_to be_ok
     expect(last_response.status).to eq(401)
-    expect(last_response.body).to eq("Bad credentials\n")
+    expect(last_response.body).to eq("'Who is this? Whats your operating number?' (Bad credentials)\n")
   end
 
   it "gets the current counter" do
-    get '/v1/current', nil, {'Authorization' => "Bearer #{token}"}
+    get '/v1/current', nil, {'HTTP_AUTHORIZATION' => "Bearer #{token}"}
     expect(last_response).to be_ok
     body = JSON.parse(last_response.body)
     expect(body['attributes']['counter']).to eq(1)
   end
 
   it "fails to get the current counter" do
-    get '/v1/current', nil, {'Authorization' => "Bearer foobar"}
+    get '/v1/current', nil, {'HTTP_AUTHORIZATION' => "Bearer foobar"}
     expect(last_response).not_to be_ok
     expect(last_response.status).to eq(403)
-    expect(last_response.body).to eq("Forbidden\n")
+    expect(last_response.body).to eq("'All other information on your level is restricted'(Forbidden)\n")
   end
 
   it "gets the next counter" do
-    get '/v1/next', nil, {'Authorization' => "Bearer #{token}"}
+    get '/v1/next', nil, {'HTTP_AUTHORIZATION' => "Bearer #{token}"}
     expect(last_response).to be_ok
     body = JSON.parse(last_response.body)
     expect(body['attributes']['counter']).to eq(2)
   end
 
   it "sets the counter to supplied number" do
-    put '/v1/next', {current: 42 }, {'Authorization' => "Bearer #{token}"}
+    put '/v1/next', {current: 42 }, {'HTTP_AUTHORIZATION' => "Bearer #{token}"}
     expect(last_response).to be_ok
     body = JSON.parse(last_response.body)
     expect(body['attributes']['counter']).to eq(42)
