@@ -23,9 +23,9 @@
 	      data-action="submit->counter#register"
 	    >
 	      <label for="email">Email:</label><br>
-	      <input type="text" id="email" name="email" required><br>
+	      <input type="text" id="register-email" name="email" required><br>
 	      <label for="password">Password:</label><br>
-	      <input type="text" id="password" name="password" required><br>
+	      <input type="password" id="register-password" name="password" required><br>
 	      <input type="submit" value="Register">
 	      <a href='#' data-action="click->counter#showLogin">Login</a>
 	    </form> 
@@ -38,12 +38,12 @@
 	      data-target="counter.loginForm"
 	      data-remote="true"
 	      data-controller='counter'
-	      data-action="submit->counter#next"
+	      data-action="submit->counter#login"
 	    >
 	      <label for="email">Email:</label><br>
-	      <input type="text" id="email" name="fname"><br>
+	      <input type="text" id="login-email" name="email"><br>
 	      <label for="password">Password:</label><br>
-	      <input type="text" id="password" name="password"><br>
+	      <input type="password" id="login-password" name="password"><br>
 	      <input type="submit" value="Login">
 	      <a href='#' data-action="click->counter#showRegister">Register</a>
 	    </form> 
