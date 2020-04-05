@@ -23,7 +23,7 @@ We'll try to avoid fishing with dynamite, and use lightweight tools:
 2020/04/05
 
 ### Location of deployed application
-Will update with heroic location tomorrow. Heroku tool belt is complaining about by Xcode being too old on my 6 year old machine :)
+url: https://ale-counter.herokuapp.com/
 
 ### Time spent
 Started at: 2020/04/04 - 10:40 CST
