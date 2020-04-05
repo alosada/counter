@@ -11,7 +11,7 @@
 <body>
   <div data-controller="counter">
 	  <div>Counter</div>
-	  <br><br>
+	  <br>
 	  <div id='register'>
 	    <br>
 	    <form
@@ -38,7 +38,7 @@
 	      data-target="counter.loginForm"
 	      data-remote="true"
 	      data-controller='counter'
-	      data-action="submit->counter#login"
+	      data-action="submit->counter#next"
 	    >
 	      <label for="email">Email:</label><br>
 	      <input type="text" id="email" name="fname"><br>
@@ -48,21 +48,28 @@
 	      <a href='#' data-action="click->counter#showRegister">Register</a>
 	    </form> 
 	  </div>
-	  <div id=counter>
+	  <div id="counter" class="hidden">
 	    <span>current:</span>
-	    <span id="current-span"><%= @user.try(:counter) %></span>
+	    <span id="current-span"><%= @user.try(:counter) %></span><br>
+	    <button data-action='click->counter#getNext'>Next</button><br>
 	    <form
 	      method='put'
 	      action="/v1/next"
 	      data-target="counter.loginForm"
 	      data-remote="true"
 	      data-controller='counter'
-	      data-action="submit->counter#login"
+	      data-action="submit->counter#setCurrent"
 	    >
-	      <input type="text" id="current" name="current" value="<%= @user.try(:counter) %>">
+	      <input
+	      id="current"
+	      name="current"
+	      value="<%= @user.try(:counter) %>"
+	      style="width:40px"
+	      type="text"
+	      >
 	      <input type="submit" value="Set current">
 	    </form> 
-	    <button>Next</button>
+	    <a id='get-current' href="#" class='hidden' data-action='click->counter#getCurrent'>get current</a>
 	  </div>
   </div>
 </body>
