@@ -39,7 +39,7 @@ I’m assuming the token won’t need to expire
 
 ### Shortcuts/Compromises made
 
-I purposely avoided shortcuts. In a rial-life scenario, if I needed to deploy something in 6 hours, I would have use RoR scaffold and probably Devise for the authentication and perhaps other gems.
+Aside from a few Sinatra template files, I purposely avoided shortcuts. In a rial-life scenario, if I needed to deploy something in 6 hours, I would have use RoR scaffold and probably Devise for the authentication and perhaps other gems.
 
 ### Stretch goals attempted
 The plan was to attempt all stretch goals.
