@@ -9,6 +9,8 @@ gem 'rspec'
 gem 'bcrypt'
 gem 'jwt'
 gem 'sassc'
+gem "byebug"
+
 
 group :production do
   # Use Postgresql for ActiveRecord
@@ -17,6 +19,5 @@ end
 
 group :development, :test do
   # Use SQLite for ActiveRecord
-  gem "byebug"
   gem 'sqlite3'
 end
