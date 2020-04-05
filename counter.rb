@@ -3,8 +3,14 @@ require_relative 'config/application'
 class Counter < Sinatra::Base
   SECRET = ENV['SECRET'] || "secret"
 
+  before do
+  	return unless request.env['CONTENT_TYPE'] == "application/json" 
+    request.body.rewind
+    params.merge!(JSON.parse request.body.read)
+  end
+
   get "/" do
-  	'Hello World'
+  	erb :index
   end
 
   post "/register" do
@@ -52,7 +58,7 @@ class Counter < Sinatra::Base
   end
 
   def token
-  	@token ||= request.env['Authorization'].split(' ').last
+  	@token ||= request.env['HTTP_AUTHORIZATION'].split(' ').last
   rescue StandardError => _e
   	nil
   end
