@@ -32,7 +32,7 @@ Lunch Break Ended 2020/04/04 16:05 CST
 6 Hour cut off: 2020/04/04 18:40 CST
 Final push for v2 2020/04/04 19:29 CST
 v3-start: 2020/04/04 09:00 CST
-v3-finish: 2020/04/04 12:00 CST
+v3-push: 2020/04/04 12:00 CST
 Finished at: Intend on putting more work on it, but not in master branch.
 
 ### Assumptions made
