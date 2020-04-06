@@ -85,9 +85,9 @@
         return response.json()
       })
       .then((data) => {
-        document.getElementById('current').value = data.attributes.counter
-        document.getElementById('current-span').innerText = data.attributes.counter
-        document.getElementById('counter').classList.remove('hidden')
+        let zeroPadded = document.helpers.zeroPad(data.attributes.counter)
+        document.getElementById('current').innerText = zeroPadded
+        document.getElementById('current-input').value = data.attributes.counter
       })
       .catch((error) => {
         window.alert('An error ocurred')
@@ -105,8 +105,9 @@
         return response.json()
       })
       .then((data) => {
-        document.getElementById('current').value = data.attributes.counter
-        document.getElementById('current-span').innerText = data.attributes.counter
+        let zeroPadded = document.helpers.zeroPad(data.attributes.counter)
+        document.getElementById('current').innerText = zeroPadded
+        document.getElementById('current-input').value = data.attributes.counter
       })
       .catch((error) => {
         window.alert('An error ocurred')
@@ -120,14 +121,15 @@
           'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'current': document.getElementById('current').value}),
+        body: JSON.stringify({'current': document.getElementById('current-input').value}),
       })
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        document.getElementById('current').value = data.attributes.counter
-        document.getElementById('current-span').innerText = data.attributes.counter
+        let zeroPadded = document.helpers.zeroPad(data.attributes.counter)
+        document.getElementById('current').innerText = zeroPadded
+        document.getElementById('current-input').value = data.attributes.counter
       })
       .catch((error) => {
         window.alert('An error ocurred')

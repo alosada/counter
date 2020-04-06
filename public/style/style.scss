@@ -1,0 +1,46 @@
+#header{
+  text-align:center;
+}
+
+#main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#img-container{
+  position:relative;
+}
+
+#current{
+  margin: auto;
+  font-size: xx-large;
+}
+
+.current-container{
+  position: absolute;
+  color: white;
+  background-color: black;
+  margin-top: 48.5%;
+  margin-left: 22.5%;
+  width: 42%;
+  height: 16%;
+  text-align: center;
+}
+
+.centering-grid{
+  display: grid;
+  height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.inline{
+  display: inline;
+}
+
+.center-text{
+  text-align: center;
+}
