@@ -6,6 +6,7 @@
   <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
   <script src="js/counter.js"></script>
   <script src="js/helpers.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/latest/normalize.css">
   <style type="text/css">
   	<%= SassC::Engine.new(File.read('public/style/style.scss'), style: :compressed).render %>
   </style>
@@ -14,7 +15,7 @@
 <body>
 <div data-controller="counter">
   <div id='header'><h1>COUNTER!</h1></div>
-  <div id='main'>
+  <div id='main'><div id='main-content'>
     <div>
       <div id=img-container>
         <div class='current-container'>
@@ -46,8 +47,10 @@
       <a id='get-current' href="#" class='hidden' data-action='click->counter#getCurrent'>getcurrent</a>
     </div>
   </div>
+  <div id='templates' class='hidden'>
+  <!-- REGISTER -->
     <div id='register'>
-      <br>
+      <h2>Register</h2>
       <form
         method='post'
         action="/register"
@@ -64,8 +67,9 @@
         <a href='#' data-action="click->counter#showLogin">Login</a>
       </form> 
     </div>
-    <div class='hidden' id='login'>
-      <br>
+    <!-- LOGIN -->
+    <div id='login'>
+      <h2>Login</h2>
       <form
         method='post'
         action="/login"
@@ -82,13 +86,15 @@
         <a href='#' data-action="click->counter#showRegister">Register</a>
       </form> 
     </div>
-  <!-- TEMPLATES -->
-  <div id=overlay>
+  </div>
+  </div>
+  <div id=overlay class='hidden'>
   	<div class='overlay-content'></div>
   </div>
   <script type="text/javascript">
   	window.addEventListener('load', function () {
-      document.helpers = Helpers
+      document.helpers = Helpers;
+      document.helpers.showOverlay('register');
     })
   </script>
 </div>

@@ -25,8 +25,7 @@
       })
       .then((data) => {
         sessionStorage.setItem("token", data.token);
-        document.getElementById('register').classList.add('hidden');
-        document.getElementById('login').classList.add('hidden');
+        document.helpers.hideOverlay(null);
         document.getElementById('get-current').click();
       })
       .catch((error) => {
@@ -55,8 +54,7 @@
       })
       .then((data) => {
         sessionStorage.setItem("token", data.token);
-        document.getElementById('register').classList.add('hidden')
-        document.getElementById('login').classList.add('hidden')
+        document.helpers.hideOverlay(null);
         document.getElementById('get-current').click()
       })
       .catch((error) => {
@@ -65,13 +63,11 @@
     }
     showRegister(eve){
       eve.preventDefault();
-      document.getElementById('login').classList.add('hidden')
-      document.getElementById('register').classList.remove('hidden')
+      document.helpers.showOverlay('register');
     }
     showLogin(eve){
       eve.preventDefault();
-      document.getElementById('register').classList.add('hidden')
-      document.getElementById('login').classList.remove('hidden')
+      document.helpers.showOverlay('login');
     }
     getCurrent(eve){
       eve.preventDefault();

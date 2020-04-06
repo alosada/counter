@@ -1,11 +1,22 @@
 #header{
-  text-align:center;
+  postion:absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  width: 100vw;
 }
 
-#main{
+#main {
+  position: absolute;
+  width: 100vw;
+  top: 0;
+}
+
+#main-content{
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 #img-container{
@@ -15,6 +26,28 @@
 #current{
   margin: auto;
   font-size: xx-large;
+}
+
+#overlay{
+  top: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 9000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content{
+  background-color: white;
+  padding: 1em;
+  margin: 2em;
+  border-radius: 0.5em;
+  h2 {
+    margin-top: 0;
+  }
 }
 
 .current-container{
@@ -34,7 +67,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .inline{

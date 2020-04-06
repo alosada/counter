@@ -1,9 +1,30 @@
 const Helpers = {
-  overlay: function(){return 'foobar'},
+  showOverlay: function(targetId){
+  	let overlay = document.getElementById('overlay')
+  	this.swapOverlay(targetId);
+  	overlay.classList.remove('hidden')
+  },
+  hideOverlay: function(){
+  	let overlay = document.getElementById('overlay')
+  	overlay.classList.add('hidden')
+  	this.swapOverlay(null);
+  },
+  swapOverlay: function(targetId){
+  	let content = document.getElementById('overlay').querySelector('.overlay-content')
+  	let target = document.getElementById(targetId);
+  	
+  	if(content.firstElementChild !== null){
+  	  document.getElementById('templates').appendChild(content.firstElementChild);
+  	  content.innerHTML = '';
+  	}
+    if(target !== null){
+      content.appendChild(target)
+    }
+  },
   zeroPad: function(string){
   	string = String(string)
   	while(6 > string.length ){
-  	  string = '0' + string;
+  	  string = '0' + string
   	}
     return string
   }
