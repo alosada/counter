@@ -23,7 +23,7 @@ RSpec.describe 'The Counter App' do
   end
 
   it "logs in a user" do
-    post '/login', user_params
+    post '/login', {email: "foobar@bazbat.com",password: 'Foobar123'}
     expect(last_response).to be_ok
     body = JSON.parse(last_response.body)
     expect(body['token']).to be_truthy
@@ -31,7 +31,7 @@ RSpec.describe 'The Counter App' do
   end
 
   it "fails to logs in a user" do
-    post '/login', user_params.merge({password: 'foobar'})
+    post '/login', {email: "foobar@bazbat.com",password: 'Foobar124'}
     expect(last_response).not_to be_ok
     expect(last_response.status).to eq(401)
     expect(last_response.body).to eq("'Who is this? Whats your operating number?' (Bad credentials)\n")
@@ -65,10 +65,26 @@ RSpec.describe 'The Counter App' do
     expect(body['attributes']['counter']).to eq(42)
   end
 
-  def generate_user_params(attributes = {})
+  it "executes order 66" do
+    5.times {|i| User.create(generate_user_params({}, i))}
+    expect(User.count).to eq(6)
+    get '/execute?order=66&pin=1234'
+    expect(User.count).to eq(0)
+  end
+
+  it "does not execute order 66" do
+    5.times {|i| User.create(generate_user_params({}, i))}
+    expect(User.count).to eq(5)
+    get '/execute?order=66'
+    expect(User.count).to eq(5)
+  end
+
+
+  def generate_user_params(attributes = {}, i = nil)
     {
-      email: 'foobar@bazbat.com',
-      password: 'Foobar123'
+      email: "foobar#{i}@bazbat.com",
+      password: 'Foobar123',
+      password_confirmation: 'Foobar123'
     }.merge(attributes)
   end
 

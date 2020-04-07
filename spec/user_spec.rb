@@ -25,8 +25,9 @@ RSpec.describe 'User' do
 
   def user_params(attributes = {})
   	{
-  		email: 'foobar@bazbat.com',
-  		password: 'Foobar123'
+  		email: 'bazbat@foobar.com',
+      password: 'Bazbat123',
+      password_confirmation: 'Bazbat123'
   	}.merge(attributes)
   end
 end
