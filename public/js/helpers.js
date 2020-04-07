@@ -27,5 +27,22 @@ const Helpers = {
   	  string = '0' + string
   	}
     return string
+  },
+  setCurrent: function(data){
+    if(Boolean(data.attributes)){
+      let zeroPadded = this.zeroPad(data.attributes.counter)
+      document.getElementById('current').innerText = zeroPadded
+      document.getElementById('current-input').value = data.attributes.counter
+    }
+  },
+  handleResponse: function(response){
+    if(response.status === 403){
+      sessionStorage.removeItem('token')
+      document.helpers.showOverlay('login')
+      window.alert('Unauthorized, please log in or register.')
+      return {}
+    }else{
+      return response.json() 
+    }
   }
 };

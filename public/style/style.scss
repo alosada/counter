@@ -1,3 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+$fonts: 'Lato', Helvetica;
+$black: #000000;
+$white: #ffffff;
+$gray:  #666666;
+$red: #990000;
+
+body {
+  font-family: $fonts;
+  color: $black;
+}
+
 #header{
   postion:absolute;
   top: 0;
@@ -52,7 +65,7 @@
 
 .current-container{
   position: absolute;
-  color: white;
+  color: $white;
   background-color: black;
   margin-top: 48.5%;
   margin-left: 22.5%;
@@ -76,4 +89,9 @@
 
 .center-text{
   text-align: center;
+}
+
+.error-message{
+  max-width: fit-content;
+  color: $red;
 }

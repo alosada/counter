@@ -78,12 +78,10 @@
         }
       })
       .then((response) => {
-        return response.json()
+        return document.helpers.handleResponse(response)
       })
       .then((data) => {
-        let zeroPadded = document.helpers.zeroPad(data.attributes.counter)
-        document.getElementById('current').innerText = zeroPadded
-        document.getElementById('current-input').value = data.attributes.counter
+        document.helpers.setCurrent(data)
       })
       .catch((error) => {
         window.alert('An error ocurred')

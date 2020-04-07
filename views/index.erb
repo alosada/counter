@@ -4,6 +4,7 @@
   <title>Counter</title>
   <meta charset="utf-8">
   <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1/dist/bouncer.polyfills.min.js"></script>
   <script src="js/counter.js"></script>
   <script src="js/helpers.js"></script>
   <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/latest/normalize.css">
@@ -60,10 +61,14 @@
         data-action="submit->counter#register"
       >
         <label for="email">Email:</label><br>
-        <input type="text" id="register-email" name="email" required><br>
+        <input type="email" id="register-email" name="email" required><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="register-password" name="password" required><br>
-        <input type="submit" value="Register">
+        <input type="password" id="register-password" name="password" minlength='6' required><br>
+        <label for="password-confirmation">Password confirmation:</label><br>
+        <input type="password" id="password_confirmation" name="password_confirmation" required><br>
+        <br>
+        <!-- <input type="submit" value="Register"> -->
+        <button>Register</button>
         <a href='#' data-action="click->counter#showLogin">Login</a>
       </form> 
     </div>
@@ -79,9 +84,10 @@
         data-action="submit->counter#login"
       >
         <label for="email">Email:</label><br>
-        <input type="text" id="login-email" name="email"><br>
+        <input type="email" id="login-email" name="email"><br>
         <label for="password">Password:</label><br>
         <input type="password" id="login-password" name="password"><br>
+        <br>
         <input type="submit" value="Login">
         <a href='#' data-action="click->counter#showRegister">Register</a>
       </form> 
@@ -92,9 +98,15 @@
   	<div class='overlay-content'></div>
   </div>
   <script type="text/javascript">
+    // Must move to stimulust application load.
   	window.addEventListener('load', function () {
       document.helpers = Helpers;
-      document.helpers.showOverlay('register');
+      if(Boolean(sessionStorage.token)){
+        document.getElementById('get-current').click();
+      }else{
+        document.bouncer = new Bouncer('form');
+        document.helpers.showOverlay('register')
+      }
     })
   </script>
 </div>

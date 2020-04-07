@@ -1,11 +1,13 @@
 require 'bcrypt'
 class User < ActiveRecord::Base
   include BCrypt
+  attr_writer :password_confirmation
 
   PRIVATE_ATTRIBUTES = %w(id password_digest)
   
   before_create :set_defaults
   validates :email, uniqueness: true, presence: true
+  validate :password_confirmation, on: :create
 
 
   def password
@@ -27,5 +29,10 @@ class User < ActiveRecord::Base
 
   def set_defaults
   	self.counter ||= 1 
+  end
+
+  def password_confirmation
+    return if password == @password_confirmation
+    errors.add(:password_confirmation, "does not match password")
   end
 end
