@@ -58,7 +58,7 @@ the use your browser to navigate to
 
 To run test run
 `rake db:create`
-`date db:migrate RACK_ENV=test`
+`rake db:migrate RACK_ENV=test`
 and 
 `rake spec`
 
